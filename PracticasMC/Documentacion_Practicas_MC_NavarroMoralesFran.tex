@@ -1,4 +1,5 @@
 \input{preambulo.tex}
+\graphicspath{ {images/} }
 
 %----------------------------------------------------------------------------------------
 %	TÍTULO Y DATOS DEL ALUMNO
@@ -102,10 +103,10 @@ Hemos comprobado que podemos conseguir generar cadenas básicas con $N_{a}$(u) =
 	 $\stackrel{5}{\Rightarrow}$  aabaabbbAABB $\stackrel{3}{\Rightarrow}$ aabaabbbaABB $\stackrel{4}{\Rightarrow}$ aabaabbbaaSBB $\stackrel{2}{\Rightarrow}$ aabaabbbaabABB $\stackrel{3}{\Rightarrow}$ aabaabbbaabaBB $\stackrel{6}{\Rightarrow}$ aabaabbbaababB $\stackrel{6}{\Rightarrow}$ aabaabbbaababb
 \end{center}
 
-Podemos apreciar que encima de cada fecha indicamos el número de la regla utilizada (las identificamos contando de izquierda a derecha y de arriba hacia abajo) en este ejemplo hemos usado las 8 reglas de producción que nos brinda la gramática, comprobando que la palabra que genera \textbf{'aabaabbbaababb'} contiene el mismo número de símbolos terminales 'a' que 'b', en concreto N = 7. Con este ejemplo demostramos que combinando las reglas de producción podemos generar cualquier palabra con la peculiaridad de que el número de 'a' coincide con el de 'b'.
-	
+Podemos apreciar que encima de cada fecha indicamos el número de la regla utilizada (las identificamos contando de izquierda a derecha y de arriba hacia abajo) en este ejemplo hemos usado las 8 reglas de producción que nos brinda la gramática, comprobando que la palabra que genera \textbf{'aabaabbbaababb'} contiene el mismo número de símbolos terminales 'a' que 'b', en concreto N = 7. Con este ejemplo demostramos también que combinando las reglas de producción podemos generar cualquier palabra con la peculiaridad de que el número de 'a' coincide con el de 'b'.
+
 %----------------------------------------------------------------------------------------
-%	Cuestion 1
+%	Cuestion 2
 %----------------------------------------------------------------------------------------
 
 \section{Practica 2: Determinar si la gramática G = (\{S, A, B\}, \{a, b, c, d\}, P, S) genera un lenguaje de tipo 3 donde P es el conjunto de reglas de producción:}
@@ -160,6 +161,30 @@ Por tanto, para generar el lenguaje de tipo 3 debemos crear las siguientes regla
 	\item $C \rightarrow d$ : Para acabar con la generación del lenguaje necesitamos generar a partir de la variable ''C'' un símbolo terminal ''d''.
 \end{itemize}
 Por tanto, con estas reglas de producción de tipo 3 generamos una gramática de tipo 3, tal y como indica el lenguaje L(G).
+
+%----------------------------------------------------------------------------------------
+%	Cuestion 3
+%----------------------------------------------------------------------------------------
+\section{Practica 3: Diseñar un autómata finito determinístico que acepte cadenas que contienen las subcadenas '0110' y '1000'. Las subcadenas pueden aparecer juntas o separadas, también pueden contener más símbolos (0+1) delante o detras de ellas.}
+
+Para comenzar esta práctica lo más sencillo es\textbf{ diseñar el autómata no determinístico} que acepta las cadenas que nos pide el ejercicio. Nos ayudamos de los ejemplos de los autómatas que son capaces de reconocer palaras que contienen las subcadenas '0110' ó '1000, de esta forma conseguimos diseñar el autómata que necesitamos de forma muy fácil, para ello \textbf{seguimos los siguientes pasos}:
+
+\begin{itemize}
+	\item Q4 deja de ser un nodo final y P0 deja de ser un nodo inicial.
+	\item Unimos los dos autómatas añadiendo una transición nula entre Q4 y P0.
+	
+\end{itemize}
+
+
+
+\begin{figure}[H]
+	\includegraphics[scale=0.8]{prac3A.png}
+	\caption{NonDeterministic finite automaton(NFA)}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[scale=0.55]{prac3.png}
+	\caption{Deterministic finite automaton(DFA)}
+\end{figure}
 
 
 
