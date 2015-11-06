@@ -1,0 +1,170 @@
+\input{preambulo.tex}
+
+%----------------------------------------------------------------------------------------
+%	TÍTULO Y DATOS DEL ALUMNO
+%----------------------------------------------------------------------------------------
+
+\title{	
+\normalfont \normalsize 
+\textsc{{\bf Modelos de computación (2015-2016)} \\ Grado en Ingeniería Informática \\ Universidad de Granada} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Memoria Prácticas \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Francisco Javier Navarro Morales} % Nombre y apellidos
+
+\date{\normalsize\today} % Incluye la fecha actual
+
+%----------------------------------------------------------------------------------------
+% DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Muestra el Título
+
+\newpage %inserta un salto de página
+
+\tableofcontents % para generar el índice de contenidos
+
+%indice de figuras y tablas (Lo he comentado para que las referencias me salgan en orden)
+%\listoffigures
+
+%\listoftables
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	Cuestion 1
+%----------------------------------------------------------------------------------------
+
+\section{Practica 1: G = (V,T,P,S), donde V = {S,A,B}, T = {a,b}, el símbolo de partida es S y las reglas son:}
+
+\begin{center}
+
+S $\to$ aB, \qquad S $\to$ bA, \qquad A $\to$ a, \qquad A $\to$ aS, 
+
+A $\to$ bAA, \qquad B $\to$ b, \qquad B $\to$ bS, \qquad B $\to$ aBB
+
+\end{center}
+
+Esta gramática genera el lenguaje: $L(G) = \{u | u \hspace{0.3em} \epsilon \hspace{0.3em} \{ a, b \}^+ \hspace{0.3em} y \hspace{0.3em} Na(u) = Nb(u) \}$, es decir, la gramática genera palabras con el mismo número de 'a' que de 'b'.
+\\ \\
+Podemos extraer las siguientes interpretaciones de las reglas de producción:
+\begin{itemize}	
+\item Interpretación de \textbf{'A'} $\to$ Genera palabras con un Símbolo Terminal 'a' de más.
+
+\item Interpretación de \textbf{'B'} $\to$ Genera palabras con un Símbolo Terminal 'b' de más.
+
+\item Interpretación de \textbf{'S'} $\to$ Genera una cadena con el mismo numero de 'a' que 'b'.
+\end{itemize}
+
+$\\$$ \stackrel{w = \lambda v}{\longrightarrow}$
+\\
+
+Hay que demostrar dos cosas:
+\begin{itemize}	
+	\item Todas las palabras generadas por la gramática tienen el mismo número de a que de b.
+	
+	\item Cualquier palabra con el mismo número de a que de b es generada.
+\end{itemize}
+
+$\\$ $\\$
+Vamos a ir desarrollando cada posibilidad de forma que para cada paso se apliquen todas las reglas de producción posibles, inicialmente tenemos dos posibilidades:
+\begin{center}
+	$^{1}$S $\Rightarrow$ aB, $\qquad$ 	$^{2}$S $\Rightarrow$ bA
+\end{center}
+
+Vamos a iniciar el desarrollo para la primera:
+\begin{flushleft}
+\qquad S $\Rightarrow$ aB $\Rightarrow$ ab, generamos la palabra $\textbf{ab}$.\\
+\qquad S $\Rightarrow$ aB $\Rightarrow$ abS $\Rightarrow$ abaB $\Rightarrow$ abab, generamos la palabra $\textbf{abab}$.\\
+\qquad S $\Rightarrow$ aB $\Rightarrow$ aaBB $\Rightarrow$ aabB $\Rightarrow$ aabb, generamos la palabra $\textbf{aabb}$.\\
+\end{flushleft}
+Continuamos el desarrollo para la segunda posibilidad:
+\begin{flushleft}
+\qquad S $\Rightarrow$ bA $\Rightarrow$ ba, generamos la palabra $\textbf{ba}$.\\
+\qquad S $\Rightarrow$ bA $\Rightarrow$ baS $\Rightarrow$ babA $\Rightarrow$ baba, generamos la palabra $\textbf{baba}$.\\
+\qquad S $\Rightarrow$ bA $\Rightarrow$ bbAA $\Rightarrow$ bbaA $\Rightarrow$ bbaa, generamos la palabra $\textbf{bbaa}$.\\
+\end{flushleft}
+
+Hemos comprobado que podemos conseguir generar cadenas básicas con $N_{a}$(u) = $N_{b}(u)$, dónde primero hay símbolos terminales 'a' y luego 'b' ó hay símbolos terminales '(ab)$^{+}$', y lo mismo cambiando el orden de 'a' y 'b'. Si queremos generar cualquier cadena perteneciente al lenguaje lo podemos conseguir combinando las anteriores palabras generadas. Por ejemplo generemos una palabra usando todas las reglas de producción:
+
+\begin{center}
+	 S $ \stackrel{1}{\Rightarrow} $ aB 
+	 $\stackrel{8}{\Rightarrow}$ aaBB 
+	 $\stackrel{7}{\Rightarrow}$ aabSB 
+	 $\stackrel{1}{\Rightarrow}$ aabaBB  
+	 $\stackrel{8}{\Rightarrow}$  aabaaBBB 
+	 $\stackrel{7}{\Rightarrow}$ aabaabSBB 
+	 $\stackrel{2}{\Rightarrow}$ aabaabbABB 
+	 $\stackrel{5}{\Rightarrow}$  aabaabbbAABB $\stackrel{3}{\Rightarrow}$ aabaabbbaABB $\stackrel{4}{\Rightarrow}$ aabaabbbaaSBB $\stackrel{2}{\Rightarrow}$ aabaabbbaabABB $\stackrel{3}{\Rightarrow}$ aabaabbbaabaBB $\stackrel{6}{\Rightarrow}$ aabaabbbaababB $\stackrel{6}{\Rightarrow}$ aabaabbbaababb
+\end{center}
+
+Podemos apreciar que encima de cada fecha indicamos el número de la regla utilizada (las identificamos contando de izquierda a derecha y de arriba hacia abajo) en este ejemplo hemos usado las 8 reglas de producción que nos brinda la gramática, comprobando que la palabra que genera \textbf{'aabaabbbaababb'} contiene el mismo número de símbolos terminales 'a' que 'b', en concreto N = 7. Con este ejemplo demostramos que combinando las reglas de producción podemos generar cualquier palabra con la peculiaridad de que el número de 'a' coincide con el de 'b'.
+	
+%----------------------------------------------------------------------------------------
+%	Cuestion 1
+%----------------------------------------------------------------------------------------
+
+\section{Practica 2: Determinar si la gramática G = (\{S, A, B\}, \{a, b, c, d\}, P, S) genera un lenguaje de tipo 3 donde P es el conjunto de reglas de producción:}
+\begin{center}
+$
+S \rightarrow AB, \qquad A \rightarrow Ab, \qquad A \rightarrow a, 
+$
+$
+\qquad B \rightarrow cB, \qquad B \rightarrow d
+$
+\end{center}
+
+
+\textbf{Gramática libre del contexto, es decir, de tipo 2}: Los símbolos terminales dependen entre ellos y alguna regla de producción es del tipo: $A \rightarrow u$ ; $A \rightarrow U$.
+
+Esta \textbf{gramática genera el lenguaje $L(G) = \{a b^{i} c^{j} d : i, j \hspace{0.3em} \epsilon \hspace{0.3em} \mathbb{N} \}$} 
+\\ \\
+Primero, vamos a \textbf{demostrar que a partir de las reglas de producción de tipo 2 se genera el lenguaje L(G)}.
+\\ \\
+Comenzamos con el símbolo de partida ''S'':
+\\ \\
+$
+S \rightarrow \underline{A}B^{1} \rightarrow \underline{A}bB^{2} \rightarrow \underline{A}bbB^{2} \rightarrow ab^{i}\underline{B}^{3} \rightarrow ab^{i}c\underline{B}^{4} \rightarrow ab^{i}cc\underline{B}^{4} \rightarrow ab^{i}c^{j}\underline{B}^{4} \rightarrow ab^{i}c^{j}d^{5}
+$
+\\ \\
+\\ \\
+
+Notas sup-indices:
+\\
+1. Como el lenguaje L(G) comienza por un símbolo terminal ''a'' seguidos por i veces el símbolo terminal ''b'', aplicamos la regla de producción $A \rightarrow Ab$, ya que a partir de la variable ''A'' podemos generar i veces el símbolo terminal ''b'' y generar el símbolo terminal ''a'' de la primera posición cuando se desee.
+\\
+2. Para generar el símbolo terminal ''b'' i veces producimos la regla de producción $A \rightarrow Ab$ y generamos $b^{i}$ veces el símbolo terminal ''b''.
+\\
+3. Como el lenguaje L(G) comienza por el símbolo terminal ''a'' y ya disponemos del símbolo terminal $b^{i}$, aplicamos la regla de producción $A \rightarrow a$ para obtener el primer símbolo terminal del lenguaje L(G).
+\\
+4. El lenguaje L(G) dispone de j veces el símbolo terminal ''c'' para ello vamos aplicando la regla de producción $B \rightarrow cB$ sobre la variable ''B'' para generar los $c^{j}$ símbolos terminales.
+\\
+5. El lenguaje L(G) termina con el símbolo terminal ''d'', por tanto, aplicamos la regla de producción $B \rightarrow d$ sobre la variable ''B'' para obtener el símbolo terminal ''d''.
+\\ \\
+Como podemos observar con las reglas de producción de tipo 2, el lenguaje L(G) se puede generar y como patrón podemos sacar que para obtener los $b^{i}$ símbolos terminales vamos aplicando la regla de producción sobre la variable ''A'' y para obtener los símbolos terminales $c^{j}$ aplicamos la regla de producción sobre la variable ''B''.
+\\ \\
+Segundo, para \textbf{generar un lenguaje de tipo 3 (Regular)}: Los símbolos terminales no dependen entre ellos y las reglas de producción tienen que ser del tipo 3, ya que si las reglas de producción son del tipo 3 el lenguaje generado es de tipo 3.
+\\ \\
+Las reglas de producción de tipo 3 contienen 1 solo símbolo terminal a la izquierda o son del tipo: $A \rightarrow uB$ ; $A \rightarrow u$ ; $A \rightarrow B$.
+\\ \\
+Por tanto, para generar el lenguaje de tipo 3 debemos crear las siguientes reglas de producción de tipo 3:
+\begin{itemize}
+	\item $S \rightarrow aB$ : Como símbolo de partida comenzamos con la variable ''S'', por tanto en el primer paso producimos el símbolo terminal ''a'' primero que se necesita y con la variable ''B'' vamos obteniendo los $b^{i}$ símbolos terminales.
+	\item $B \rightarrow bB$ : Con la variable ''B'' obtenemos los $b^{i}$ símbolos terminales.
+	\item $B \rightarrow C$ : Una vez obtenidos los $b^{i}$ símbolos terminales deseados para obtener los $c^{j}$ símbolos terminales, producimos un cambio de variable para generar la producción de los símbolos terminales ''c''. 
+	\item $C \rightarrow cC$ : Con la variable ''C'' generamos la producción de los $c^{j}$ símbolos terminales deseados.
+	\item $C \rightarrow d$ : Para acabar con la generación del lenguaje necesitamos generar a partir de la variable ''C'' un símbolo terminal ''d''.
+\end{itemize}
+Por tanto, con estas reglas de producción de tipo 3 generamos una gramática de tipo 3, tal y como indica el lenguaje L(G).
+
+
+
+%Referencias - Con ambas etiquetas se llama al fichero citas.bib
+%\bibliography{citas} %archivo citas.bib que contiene las entradas 
+%\bibliographystyle{ieeetr} % hay varias formas de citar
+
+\end{document}
