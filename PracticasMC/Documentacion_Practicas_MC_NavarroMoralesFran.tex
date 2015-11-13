@@ -175,12 +175,43 @@ Para comenzar esta práctica lo más sencillo es\textbf{ diseñar el autómata n
 	
 \end{itemize}
 
-
-
 \begin{figure}[H]
 	\includegraphics[scale=0.8]{prac3A.png}
 	\caption{NonDeterministic finite automaton(NFA)}
 \end{figure}
+
+Los autómatas no determinísticos son muy ineficientes porque exploran todas las posibilidades. Para resolver el problema que tenemos entre las manos de una forma más eficiente vamos a tranformarlo en un autómata que para cada símbolo leido sepa que acción debe realizar. Es un proceso exponencial a medida en que crece el número de nodos en el 'NFA', para no equivocarnos vamos a realizar una tabla donde indiquemos para cada nodo cual es la acción que realiza al leer cierto símbolo de la cinta de entrada.
+
+\begin{table}[H]
+	\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			\textbf{Símbolo} & \textbf{Q0} & \textbf{Q1} & \textbf{Q2} & \textbf{Q3} & \textbf{Q4} \\
+			\hline \hline
+			0 & \{Q0,Q1\} & \{Ø\} & \{Ø\} & \{Q4,P0\} & \{Q4,P0\}\\ \hline
+			1 & \{Q0\} & \{Q2\} & \{Q3\} & \{Ø\} & \{Q4,P0,P1\} \\ \hline
+		\end{tabular}
+	\end{center}
+		\caption{Tabla nodos Q.}
+		\label{tabla:nodosQ}
+\end{table}  
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			\textbf{Símbolo} & \textbf{P0} & \textbf{P1} & \textbf{P2} & \textbf{P3} & \textbf{P4} \\
+			\hline \hline
+			0 & \{P0\} & \{P2\} & \{P3\} & \{P4\} & \{P4\}\\ \hline
+			1 & \{P0,P1\} & \{Ø\} & \{Ø\} & \{Ø\} & \{P4\} \\ \hline
+		\end{tabular}
+	\end{center}
+	\caption{Tabla nodos P.}
+	\label{tabla:nodosP}
+\end{table} 
+
+Para construir nuestro autómata determinístico nos apoyaremos de las tablas que hemos creado. \textbf{Comprobamos para cada estado} de los que tenemos entre \textbf{\{<estados>\}} a que \textbf{estado(s) pasa} según lea un 0/1, si tenemos un \textbf{estado compuesto} por 2 o más estados tenemos que realizar el proceso para cada subestado y el \textbf{resultado será la unión} de los resultados de cada subestado. Una vez generado el nuevo estado tenemos \textbf{dos posibilidades} que el \textbf{nuevo estado se repita}, en este caso trazamos una flecha desde el estado actual hasta el estado obtenido(etiquetando dicha flecha con el símbolo que produce el cambio de estados); por otra parte, si \textbf{es un nuevo estado} debemos colocarlo unidos por una flecha etiquetada. \textbf{Repetimos} todo el proceso hasta que todos los estados tengan un estado objetivo para cada símbolo posible(en nuestro caso 0/1).
+
 \begin{figure}[H]
 	\includegraphics[scale=0.55]{prac3.png}
 	\caption{Deterministic finite automaton(DFA)}
